@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  TravelPlanner
+
+  Created by Jan Kazubski on 07/08/2024.
+  
+*/
+
+
+"map" = "Mapa";
+"places_to_visit" = "Miejsca do zobaczenia";
