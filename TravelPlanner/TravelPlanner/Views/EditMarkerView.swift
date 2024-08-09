@@ -1,5 +1,5 @@
 //
-//  NewMarkerView.swift
+//  EditMarkerView.swift
 //  TravelPlanner
 //
 //  Created by Jan Kazubski on 09/08/2024.
@@ -8,17 +8,28 @@
 import MapKit
 import SwiftUI
 
-struct NewMarkerView: View {
+struct EditMarkerView: View {
     @Environment(\.modelContext) private var context
-    
-    @State var newMarker: MKMapItem
+
+    @State var markerItem: MarkerItem
     @Binding var isPresented: Bool
 
     @State private var name = ""
     @State private var description = ""
 
+    @State private var cameraPosition: MapCameraPosition = .automatic
+
     var body: some View {
         VStack {
+            //TODO: on tap go to content view or mapview
+            //TODO: button to return to this marker
+            Map(position: $cameraPosition) {
+                Marker(item: markerItem.asMKMapItem())
+                    .annotationTitles(.hidden)
+            }
+            .cornerRadius(10)
+
+            Spacer()
             Group {
                 TextField("name", text: $name, axis: .vertical)
                     .font(.title)
@@ -35,7 +46,7 @@ struct NewMarkerView: View {
             Spacer()
 
             Button {
-                newMarker.openInMaps(launchOptions: nil)
+                markerItem.asMKMapItem().openInMaps(launchOptions: nil)
             } label: {
                 HStack {
                     Image(systemName: "apple.logo")
@@ -63,18 +74,11 @@ struct NewMarkerView: View {
                 Button {
                     // TODO: add check if name is not empty
                     if !name.isEmpty {
-                        let coordinates = newMarker.placemark.coordinate
-                        let markerItem = MarkerItem(
-                            placeName: name,
-                            placeDescription: description,
-                            longitude: coordinates.longitude,
-                            latitude: coordinates.latitude
-                        )
-                        addMarker(markerItem)
+                        updateMarker()
                         isPresented = false
                     }
                 } label: {
-                    Text("add_marker")
+                    Text("save_changes")
                         .font(.headline)
                         .tint(.white)
                         .frame(maxWidth: .infinity)
@@ -85,43 +89,42 @@ struct NewMarkerView: View {
                 .layoutPriority(1)
             }.padding(.vertical)
         }.onAppear {
-            if name.isEmpty {
-                setDefaultLocationName()
-            }
+            name = markerItem.placeName
+            description = markerItem.placeDescription
+
+            let coordinates = CLLocationCoordinate2D(
+                latitude: markerItem.latitude,
+                longitude: markerItem.longitude
+            )
+
+            cameraPosition = .camera(
+                MapCamera.init(
+                    MKMapCamera(
+                        lookingAtCenter: coordinates,
+                        fromDistance: 1000,
+                        pitch: 0,
+                        heading: 0
+                    )))
         }
     }
 
-    private func setDefaultLocationName() {
-        let coordinates = newMarker.placemark.coordinate
-        let location = CLLocation(
-            latitude: coordinates.latitude, longitude: coordinates.longitude)
+    func updateMarker() {
+        markerItem.placeName = name
+        markerItem.placeDescription = description
 
-        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-            if error != nil {
-                return
-            }
-
-            guard let placemark = placemarks?.first else {
-                return
-            }
-
-            if let locationName = placemark.name {
-                name = locationName
-            }
-        }
-    }
-    
-    func addMarker(_ marker: MarkerItem) {
-        context.insert(marker)
+        try? context.save()
     }
 }
 
 #Preview {
-    NewMarkerView(
-        newMarker: MKMapItem(
-            placemark: MKPlacemark(
-                coordinate: CLLocationCoordinate2D(
-                    latitude: 37.3349, longitude: -122.0090))),
+    EditMarkerView(
+        markerItem: MarkerItem(
+            placeName: "Apple",
+            placeDescription:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco la",
+            longitude: -122.0090,
+            latitude: 37.3349
+        ),
         isPresented: .constant(true)
     )
 }

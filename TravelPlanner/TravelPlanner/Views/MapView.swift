@@ -7,20 +7,22 @@
 
 import MapKit
 import SwiftUI
+import SwiftData
 
 struct MapView: View {
-    @State private var cameraPosition: MapCameraPosition = .automatic
+    @Query private var placesToVisit: [MarkerItem]
+    
+    @State private var cameraPosition: MapCameraPosition = .userLocation(fallback: .automatic)
     @State private var selection: MapSelection<MKMapItem>?
 
     @State private var searchCityText = ""
     @State private var isSearchEnabled = false
 
-    @State private var placesToVisit: [MKMapItem] = []
-
     @State private var isAddMarkerEnabled = false
     @State private var isAddMarkerSheetPresented = false
     @State private var newMarker: MKMapItem?
 
+    
     var body: some View {
         if isSearchEnabled {
             NavigationStack {
@@ -46,7 +48,7 @@ struct MapView: View {
                 }
 
                 ForEach(placesToVisit, id: \.self) { place in
-                    Marker(item: place)
+                    Marker(item: place.asMKMapItem())
                 }
                 .mapItemDetailSelectionAccessory(
                     isAddMarkerEnabled ? .none : .sheet)

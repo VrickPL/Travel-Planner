@@ -6,6 +6,9 @@
   
 */
 
+
+"show_location_explanation" = "We need your location to show your current position.";
+
 "map" = "Map";
 "places_to_visit" = "Places to visit";
 
@@ -14,3 +17,4 @@
 "open_maps" = "Open maps";
 "cancel" = "Cancel";
 "add_marker" = "Add marker";
+"save_changes" = "Save changes";

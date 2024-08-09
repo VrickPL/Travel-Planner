@@ -7,6 +7,8 @@
 */
 
 
+"show_location_explanation" = "Potrzebujemy twojej lokalizacji, aby wyświetlać twoją aktualną pozycję.";
+
 "map" = "Mapa";
 "places_to_visit" = "Miejsca do zobaczenia";
 
@@ -15,3 +17,4 @@
 "open_maps" = "Otwórz mapy";
 "cancel" = "Anuluj";
 "add_marker" = "Dodaj znacznik";
+"save_changes" = "Zapisz zmiany";
