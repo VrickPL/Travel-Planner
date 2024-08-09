@@ -8,3 +8,9 @@
 
 "map" = "Map";
 "places_to_visit" = "Places to visit";
+
+"name" = "Name";
+"description" = "Description";
+"open_maps" = "Open maps";
+"cancel" = "Cancel";
+"add_marker" = "Add marker";

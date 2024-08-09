@@ -9,3 +9,9 @@
 
 "map" = "Mapa";
 "places_to_visit" = "Miejsca do zobaczenia";
+
+"name" = "Nazwa";
+"description" = "Opis";
+"open_maps" = "Otwórz mapy";
+"cancel" = "Anuluj";
+"add_marker" = "Dodaj znacznik";

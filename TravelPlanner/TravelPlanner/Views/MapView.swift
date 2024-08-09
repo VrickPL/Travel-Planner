@@ -18,7 +18,7 @@ struct MapView: View {
     @State private var placesToVisit: [MKMapItem] = []
 
     @State private var isAddMarkerEnabled = false
-    @State private var isAddMarkerMode = false
+    @State private var isAddMarkerSheetPresented = false
     @State private var newMarker: MKMapItem?
 
     var body: some View {
@@ -39,6 +39,11 @@ struct MapView: View {
         MapReader { proxy in
             Map(position: $cameraPosition, selection: $selection) {
                 UserAnnotation()
+                
+                if let newMarker = newMarker {
+                    Marker(item: newMarker)
+                        .annotationTitles(.hidden)
+                }
 
                 ForEach(placesToVisit, id: \.self) { place in
                     Marker(item: place)
@@ -60,7 +65,12 @@ struct MapView: View {
                             )
                         )
 
-                        isAddMarkerMode.toggle()
+                        guard let newMarker else {
+                            return
+                        }
+
+                        cameraPosition = .item(newMarker)
+                        isAddMarkerSheetPresented = true
                     }
                 }
             }
@@ -86,12 +96,21 @@ struct MapView: View {
                 .padding(.trailing, 4)
                 .padding(.bottom, 20)
             }
-            .sheet(isPresented: $isAddMarkerMode, onDismiss: {
-                isAddMarkerEnabled = false
-            }) {
-                NewMarkerView(newMarker: newMarker)
+            .sheet(
+                isPresented: $isAddMarkerSheetPresented,
+                onDismiss: {
+                    newMarker = nil
+                    isAddMarkerEnabled = false
+                }
+            ) {
+                if let newMarker = newMarker {
+                    NewMarkerView(
+                        newMarker: newMarker,
+                        isPresented: $isAddMarkerSheetPresented
+                    )
                     .presentationDetents([.fraction(0.5)])
-                //                placesToVisit.append(newItem)
+                    .padding()
+                }
             }
         }
     }
