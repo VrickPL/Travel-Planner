@@ -6,10 +6,21 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct PlacesToVisitListView: View {
+    @State private var selectedPlace: MKMapItem?
+    private var places: [MKMapItem] = []
+    
     var body: some View {
-        Text("Places to visit")
+        List(
+            places,
+            id: \.self,
+            selection: $selectedPlace
+        ) {
+            Text($0.name ?? "Place to visit")
+        }
+        .mapItemDetailSheet(item: $selectedPlace)
     }
 }
 
