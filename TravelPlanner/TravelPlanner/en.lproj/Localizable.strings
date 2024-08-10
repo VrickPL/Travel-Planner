@@ -18,3 +18,13 @@
 "cancel" = "Cancel";
 "add_marker" = "Add marker";
 "save_changes" = "Save changes";
+
+"general" = "General";
+"language" = "Language";
+"theme" = "Theme";
+"app_author" = "App author";
+"auto" = "Auto";
+"english" = "English";
+"polish" = "Polski";
+"light" = "Light";
+"dark" = "Dark";

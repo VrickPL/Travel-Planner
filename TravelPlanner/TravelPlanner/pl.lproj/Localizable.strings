@@ -18,3 +18,13 @@
 "cancel" = "Anuluj";
 "add_marker" = "Dodaj znacznik";
 "save_changes" = "Zapisz zmiany";
+
+"general" = "Ogólne";
+"language" = "Język";
+"theme" = "Motyw";
+"app_author" = "Autor";
+"auto" = "Automatyczny";
+"english" = "English";
+"polish" = "Polski";
+"light" = "Jasny";
+"dark" = "Ciemny";
