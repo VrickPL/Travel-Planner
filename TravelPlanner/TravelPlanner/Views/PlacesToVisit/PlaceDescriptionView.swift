@@ -7,14 +7,26 @@
 
 import SwiftUI
 
-struct PlaceDescriptionView: View {    
+struct PlaceDescriptionView: View {
     @Binding var name: String
     @Binding var description: String
 
+    @FocusState.Binding var isInputActive: Bool
+
     var body: some View {
+        if isInputActive {
+            HStack {
+                Spacer()
+                Button("done") {
+                    isInputActive = false
+                }
+            }
+        }
+
         TextField("name", text: $name, axis: .vertical)
             .font(.title)
             .padding(.top)
+            .focused($isInputActive)
 
         if name.isEmpty {
             HStack {
@@ -31,12 +43,6 @@ struct PlaceDescriptionView: View {
         TextField("description", text: $description, axis: .vertical)
             .textFieldStyle(.roundedBorder)
             .padding(.vertical)
+            .focused($isInputActive)
     }
-}
-
-#Preview {
-    PlaceDescriptionView(
-        name: .constant("Apple"),
-        description: .constant("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco la")
-    )
 }

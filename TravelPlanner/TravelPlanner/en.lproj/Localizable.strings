@@ -7,11 +7,14 @@
 */
 
 
+//General
 "show_location_explanation" = "We need your location to show your current position.";
 
 "map" = "Map";
 "places_to_visit" = "Places to visit";
 
+
+//Places to visit
 "name" = "Name";
 "description" = "Description";
 "open_maps" = "Open maps";
@@ -19,7 +22,10 @@
 "add_marker" = "Add marker";
 "save_changes" = "Save changes";
 "name_is_empty" = "Name cannot be empty.";
+"done" = "Done";
 
+
+//Settings
 "general" = "General";
 "language" = "Language";
 "theme" = "Theme";

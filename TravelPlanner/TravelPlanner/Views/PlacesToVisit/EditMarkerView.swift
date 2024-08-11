@@ -18,32 +18,38 @@ struct EditMarkerView: View {
     @State private var description = ""
 
     @State private var cameraPosition: MapCameraPosition = .automatic
+    @FocusState private var isInputActive: Bool
 
     var body: some View {
         VStack {
-            Map(position: $cameraPosition) {
-                Marker(item: markerItem.getAsMKMapItem())
-                    .annotationTitles(.hidden)
-            }
-            .cornerRadius(10)
+            if !isInputActive {
+                Map(position: $cameraPosition) {
+                    Marker(item: markerItem.getAsMKMapItem())
+                        .annotationTitles(.hidden)
+                }
+                .cornerRadius(10)
 
-            Spacer()
+                Spacer()
+            }
 
             PlaceDescriptionView(
                 name: $name,
-                description: $description
+                description: $description,
+                isInputActive: $isInputActive
             )
 
             Spacer()
-            
+
             MarkerViewButtons(
                 isPresented: $isPresented,
-                isAcceptButtonAvailable: !name.isEmpty,
                 acceptButtonName: "save_changes",
                 mapItem: markerItem.getAsMKMapItem(),
+                isAcceptButtonAvailable: isNameNotEmpty,
                 onAccept: updateMarker
             )
-        }.onAppear {
+        }
+        .animation(.bouncy, value: isInputActive)
+        .onAppear {
             name = markerItem.placeName
             description = markerItem.placeDescription
 
@@ -62,6 +68,12 @@ struct EditMarkerView: View {
                     )
                 )
             )
+        }
+    }
+
+    private var isNameNotEmpty: () -> Bool {
+        return {
+            !name.isEmpty
         }
     }
 

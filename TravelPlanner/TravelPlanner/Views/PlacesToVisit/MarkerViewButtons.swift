@@ -10,10 +10,10 @@ import SwiftUI
 
 struct MarkerViewButtons: View {
     @Binding var isPresented: Bool
-    @State var isAcceptButtonAvailable: Bool
     let acceptButtonName: String
     let mapItem: MKMapItem
-
+    
+    let isAcceptButtonAvailable: () -> Bool
     let onAccept: () -> Void
 
     var body: some View {
@@ -44,12 +44,12 @@ struct MarkerViewButtons: View {
             .layoutPriority(1)
 
             Button {
-                if isAcceptButtonAvailable {
+                if isAcceptButtonAvailable() {
                     onAccept()
                     isPresented = false
                 }
             } label: {
-                Text(acceptButtonName)
+                Text(NSLocalizedString(acceptButtonName, comment: ""))
                     .font(.headline)
                     .tint(.white)
                     .frame(maxWidth: .infinity)

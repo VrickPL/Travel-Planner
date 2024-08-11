@@ -17,20 +17,23 @@ struct NewMarkerView: View {
     @State private var name = ""
     @State private var description = ""
 
+    @FocusState private var isInputActive: Bool
+
     var body: some View {
         VStack {
             PlaceDescriptionView(
                 name: $name,
-                description: $description
+                description: $description,
+                isInputActive: $isInputActive
             )
 
             Spacer()
 
             MarkerViewButtons(
                 isPresented: $isPresented,
-                isAcceptButtonAvailable: !name.isEmpty,
                 acceptButtonName: "add_marker",
                 mapItem: newMarker,
+                isAcceptButtonAvailable: isNameNotEmpty,
                 onAccept: addMarker
             )
         }.onAppear {
@@ -57,6 +60,12 @@ struct NewMarkerView: View {
             if let locationName = placemark.name {
                 name = locationName
             }
+        }
+    }
+
+    private var isNameNotEmpty: () -> Bool {
+        return {
+            !name.isEmpty
         }
     }
 

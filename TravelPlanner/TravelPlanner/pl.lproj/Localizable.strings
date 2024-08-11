@@ -6,12 +6,14 @@
   
 */
 
-
+//General
 "show_location_explanation" = "Potrzebujemy twojej lokalizacji, aby wyświetlać twoją aktualną pozycję.";
 
 "map" = "Mapa";
 "places_to_visit" = "Miejsca do zobaczenia";
 
+
+//Places to visit
 "name" = "Nazwa";
 "description" = "Opis";
 "open_maps" = "Otwórz mapy";
@@ -19,7 +21,10 @@
 "add_marker" = "Dodaj znacznik";
 "save_changes" = "Zapisz zmiany";
 "name_is_empty" = "Nazwa nie może być pusta.";
+"done" = "Gotowe";
 
+
+//Settings
 "general" = "Ogólne";
 "language" = "Język";
 "theme" = "Motyw";
