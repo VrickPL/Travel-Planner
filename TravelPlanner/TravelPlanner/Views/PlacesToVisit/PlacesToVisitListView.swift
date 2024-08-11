@@ -21,16 +21,30 @@ struct PlacesToVisitListView: View {
         NavigationView {
             List {
                 ForEach(placesToVisit) { place in
-                    Button {
-                        selectedPlace = place
-                        isNewMarketSheetEnabled = true
-                    } label: {
-                        HStack {
-                            Text(place.placeName)
-                            Spacer()
-                            Image(systemName: "pencil")
+                    HStack {
+                        Button {
+                            //TODO: fix clicking on button and load photo from gallery
+                        } label: {
+                            ZStack {
+                                Circle()
+                                    .stroke(lineWidth: 2)
+                                    .frame(width: 40, height: 40)
+                                
+                                Image(systemName: "plus")
+                                    .resizable()
+                                    .frame(width: 15, height: 15)
+                            }
                         }
-                        .tint(.black)
+                        .foregroundStyle(.blue)
+                        .padding(.trailing, 8)
+                        
+                        Button {
+                            selectedPlace = place
+                            isNewMarketSheetEnabled = true
+                        } label: {
+                            SinglePlaceToVisit(place: place)
+                        }
+                        .padding(.vertical, 4)
                     }
                 }
                 .onDelete { indexes in
@@ -47,7 +61,7 @@ struct PlacesToVisitListView: View {
                         .frame(height: 30)
                 }
             )
-            .onChange(of: selectedPlace) { }
+            .onChange(of: selectedPlace) {}
             .sheet(
                 isPresented: $isNewMarketSheetEnabled,
                 onDismiss: {

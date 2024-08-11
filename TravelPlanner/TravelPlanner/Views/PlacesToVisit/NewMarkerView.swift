@@ -17,6 +17,9 @@ struct NewMarkerView: View {
     @State private var name = ""
     @State private var description = ""
 
+    @State private var city: String?
+    @State private var country: String?
+
     @FocusState private var isInputActive: Bool
 
     var body: some View {
@@ -38,12 +41,12 @@ struct NewMarkerView: View {
             )
         }.onAppear {
             if name.isEmpty {
-                setDefaultLocationName()
+                setDefaultLocationInfo()
             }
         }
     }
 
-    private func setDefaultLocationName() {
+    private func setDefaultLocationInfo() {
         let coordinates = newMarker.placemark.coordinate
         let location = CLLocation(
             latitude: coordinates.latitude, longitude: coordinates.longitude)
@@ -57,9 +60,9 @@ struct NewMarkerView: View {
                 return
             }
 
-            if let locationName = placemark.name {
-                name = locationName
-            }
+            name = placemark.name ?? ""
+            self.city = placemark.locality
+            self.country = placemark.country
         }
     }
 
@@ -76,7 +79,9 @@ struct NewMarkerView: View {
                 placeName: name,
                 placeDescription: description,
                 longitude: coordinates.longitude,
-                latitude: coordinates.latitude
+                latitude: coordinates.latitude,
+                country: country,
+                city: city
             )
 
             context.insert(markerItem)

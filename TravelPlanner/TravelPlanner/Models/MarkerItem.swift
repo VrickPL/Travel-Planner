@@ -16,18 +16,24 @@ class MarkerItem: Identifiable {
     var placeDescription: String
     var longitude: Double
     var latitude: Double
+    var country: String?
+    var city: String?
 
     init(
         placeName: String,
         placeDescription: String,
         longitude: Double,
-        latitude: Double
+        latitude: Double,
+        country: String?,
+        city: String?
     ) {
         self.id = UUID().uuidString
         self.placeName = placeName
         self.placeDescription = placeDescription
         self.longitude = longitude
         self.latitude = latitude
+        self.country = country
+        self.city = city
     }
 
     func getAsMKMapItem() -> MKMapItem {

@@ -28,6 +28,9 @@ struct EditMarkerView: View {
                         .annotationTitles(.hidden)
                 }
                 .cornerRadius(10)
+                .onAppear {
+                    setCameraToMarker()
+                }
 
                 Spacer()
             }
@@ -49,26 +52,27 @@ struct EditMarkerView: View {
             )
         }
         .animation(.bouncy, value: isInputActive)
-        .onAppear {
-            name = markerItem.placeName
-            description = markerItem.placeDescription
+    }
+    
+    private func setCameraToMarker() {
+        name = markerItem.placeName
+        description = markerItem.placeDescription
 
-            let coordinates = CLLocationCoordinate2D(
-                latitude: markerItem.latitude,
-                longitude: markerItem.longitude
-            )
+        let coordinates = CLLocationCoordinate2D(
+            latitude: markerItem.latitude,
+            longitude: markerItem.longitude
+        )
 
-            cameraPosition = .camera(
-                MapCamera.init(
-                    MKMapCamera(
-                        lookingAtCenter: coordinates,
-                        fromDistance: 1000,
-                        pitch: 0,
-                        heading: 0
-                    )
+        cameraPosition = .camera(
+            MapCamera.init(
+                MKMapCamera(
+                    lookingAtCenter: coordinates,
+                    fromDistance: 1000,
+                    pitch: 0,
+                    heading: 0
                 )
             )
-        }
+        )
     }
 
     private var isNameNotEmpty: () -> Bool {
@@ -94,7 +98,9 @@ struct EditMarkerView: View {
             placeDescription:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco la",
             longitude: -122.0090,
-            latitude: 37.3349
+            latitude: 37.3349,
+            country: "US",
+            city: "Cupertino"
         ),
         isPresented: .constant(true)
     )
