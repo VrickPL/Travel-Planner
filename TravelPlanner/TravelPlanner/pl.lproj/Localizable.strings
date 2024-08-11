@@ -18,6 +18,7 @@
 "cancel" = "Anuluj";
 "add_marker" = "Dodaj znacznik";
 "save_changes" = "Zapisz zmiany";
+"name_is_empty" = "Nazwa nie może być pusta.";
 
 "general" = "Ogólne";
 "language" = "Język";

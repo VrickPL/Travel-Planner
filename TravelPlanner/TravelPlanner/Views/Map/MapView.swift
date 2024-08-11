@@ -48,7 +48,7 @@ struct MapView: View {
                 }
 
                 ForEach(placesToVisit, id: \.self) { place in
-                    Marker(item: place.asMKMapItem())
+                    Marker(item: place.getAsMKMapItem())
                 }
                 .mapItemDetailSelectionAccessory(
                     isAddMarkerEnabled ? .none : .sheet)

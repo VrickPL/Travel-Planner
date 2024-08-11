@@ -30,7 +30,7 @@ class MarkerItem: Identifiable {
         self.latitude = latitude
     }
 
-    func asMKMapItem() -> MKMapItem {
+    func getAsMKMapItem() -> MKMapItem {
         let placemark = MKPlacemark(
             coordinate: CLLocationCoordinate2D(
                 latitude: latitude,

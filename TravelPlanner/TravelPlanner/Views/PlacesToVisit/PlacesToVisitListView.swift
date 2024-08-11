@@ -18,8 +18,6 @@ struct PlacesToVisitListView: View {
     @State private var isNewMarketSheetEnabled = false
 
     var body: some View {
-        // TODO: if list is empty, show text describing it
-        // TODO: dark theme colors
         NavigationView {
             List {
                 ForEach(placesToVisit) { place in
@@ -49,13 +47,7 @@ struct PlacesToVisitListView: View {
                         .frame(height: 30)
                 }
             )
-            .onChange(of: selectedPlace) {
-                if let selectedPlace = selectedPlace {
-                    print("zmiana - \(selectedPlace.placeName)")
-                } else {
-                    print("zmiana - nil")
-                }
-            }
+            .onChange(of: selectedPlace) { }
             .sheet(
                 isPresented: $isNewMarketSheetEnabled,
                 onDismiss: {

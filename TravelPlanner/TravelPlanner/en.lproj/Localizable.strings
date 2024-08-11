@@ -18,6 +18,7 @@
 "cancel" = "Cancel";
 "add_marker" = "Add marker";
 "save_changes" = "Save changes";
+"name_is_empty" = "Name cannot be empty.";
 
 "general" = "General";
 "language" = "Language";
