@@ -14,6 +14,7 @@
 
 
 //Places to visit
+"empty_list" = "Your list is empty! \nMark some new places on the map.";
 "name" = "Name";
 "description" = "Description";
 "open_maps" = "Open maps";
@@ -24,6 +25,11 @@
 "save_changes" = "Save changes";
 "name_is_empty" = "Name cannot be empty.";
 "done" = "Done";
+"unknown_country" = "Unknown country";
+"unknown_city" = "Unknown city";
+"all" = "All";
+"country" = "Country";
+"city" = "City";
 
 
 //Settings

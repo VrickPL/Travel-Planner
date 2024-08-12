@@ -23,7 +23,7 @@ struct ContentView: View {
                     Text("map")
                 }
             
-            PlacesToVisitListView()
+            PlacesToVisitView()
                 .tabItem {
                     Image(systemName: "heart")
                     Text("places_to_visit")

@@ -10,10 +10,11 @@
 "show_location_explanation" = "Potrzebujemy twojej lokalizacji, aby wyświetlać twoją aktualną pozycję.";
 
 "map" = "Mapa";
-"places_to_visit" = "Miejsca do zobaczenia";
+"places_to_visit" = "Miejsca do zwiedzenia";
 
 
 //Places to visit
+"empty_list" = "Twoja lista jest pusta! \nZaznacz na mapie nowe miejsca.";
 "name" = "Nazwa";
 "description" = "Opis";
 "open_maps" = "Otwórz mapy";
@@ -24,6 +25,11 @@
 "save_changes" = "Zapisz zmiany";
 "name_is_empty" = "Nazwa nie może być pusta.";
 "done" = "Gotowe";
+"unknown_country" = "Nieznany kraj";
+"unknown_city" = "Nieznane miasto";
+"all" = "Wszystkie";
+"country" = "Kraj";
+"city" = "Miasto";
 
 
 //Settings
