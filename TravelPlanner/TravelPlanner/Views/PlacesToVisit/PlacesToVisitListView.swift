@@ -79,7 +79,7 @@ struct PlacesToVisitListView: View {
         }
     }
 
-    func deleteMarker(_ markerItem: MarkerItem) {
+    private func deleteMarker(_ markerItem: MarkerItem) {
         context.delete(markerItem)
     }
 }

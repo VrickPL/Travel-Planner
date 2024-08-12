@@ -37,7 +37,8 @@ struct NewMarkerView: View {
                 acceptButtonName: "add_marker",
                 mapItem: newMarker,
                 isAcceptButtonAvailable: isNameNotEmpty,
-                onAccept: addMarker
+                onAccept: addMarker,
+                onDecline: {}
             )
         }.onAppear {
             if name.isEmpty {

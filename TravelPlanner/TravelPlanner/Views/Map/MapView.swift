@@ -6,14 +6,15 @@
 //
 
 import MapKit
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct MapView: View {
     @Query private var placesToVisit: [MarkerItem]
-    
-    @State private var cameraPosition: MapCameraPosition = .userLocation(fallback: .automatic)
-    @State private var selection: MapSelection<MKMapItem>?
+
+    @State private var cameraPosition: MapCameraPosition = .userLocation(
+        fallback: .automatic)
+    @State private var selection: MarkerItem?
 
     @State private var searchCityText = ""
     @State private var isSearchEnabled = false
@@ -22,7 +23,9 @@ struct MapView: View {
     @State private var isAddMarkerSheetPresented = false
     @State private var newMarker: MKMapItem?
 
-    
+    @State private var isEditMarkerSheetPresented = false
+    @State private var editMarker: MarkerItem?
+
     var body: some View {
         if isSearchEnabled {
             NavigationStack {
@@ -41,22 +44,40 @@ struct MapView: View {
         MapReader { proxy in
             Map(position: $cameraPosition, selection: $selection) {
                 UserAnnotation()
-                
+
                 if let newMarker = newMarker {
                     Marker(item: newMarker)
+                        .tint(.blue)
                         .annotationTitles(.hidden)
                 }
 
                 ForEach(placesToVisit, id: \.self) { place in
                     Marker(item: place.getAsMKMapItem())
+                        .annotationTitles(.hidden)
                 }
-                .mapItemDetailSelectionAccessory(
-                    isAddMarkerEnabled ? .none : .sheet)
             }
-            .mapFeatureSelectionAccessory(isAddMarkerEnabled ? .none : .sheet)
             .mapControls {
                 MapUserLocationButton()
                 MapCompass()
+            }
+            .safeAreaInset(edge: .bottom) {
+                HStack {
+                    Spacer()
+
+                    VStack {
+                        CustomMapButton(
+                            isEnabled: $isAddMarkerEnabled,
+                            systemImageName: "plus"
+                        )
+
+                        CustomMapButton(
+                            isEnabled: $isSearchEnabled,
+                            systemImageName: "magnifyingglass"
+                        )
+                    }
+                }
+                .padding(.trailing, 4)
+                .padding(.bottom, 20)
             }
             .onTapGesture { position in
                 if isAddMarkerEnabled {
@@ -79,25 +100,6 @@ struct MapView: View {
             .onAppear {
                 CLLocationManager().requestWhenInUseAuthorization()
             }
-            .safeAreaInset(edge: .bottom) {
-                HStack {
-                    Spacer()
-
-                    VStack {
-                        CustomMapButton(
-                            isEnabled: $isAddMarkerEnabled,
-                            systemImageName: "plus"
-                        )
-
-                        CustomMapButton(
-                            isEnabled: $isSearchEnabled,
-                            systemImageName: "magnifyingglass"
-                        )
-                    }
-                }
-                .padding(.trailing, 4)
-                .padding(.bottom, 20)
-            }
             .sheet(
                 isPresented: $isAddMarkerSheetPresented,
                 onDismiss: {
@@ -114,27 +116,35 @@ struct MapView: View {
                     .padding()
                 }
             }
-        }
-    }
-
-    private struct CustomMapButton: View {
-        @Binding var isEnabled: Bool
-        var systemImageName: String
-
-        var body: some View {
-            Button {
-                isEnabled.toggle()
-            } label: {
-                Image(systemName: systemImageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 24)
+            .sheet(item: $selection) { marker in
+                if isEditMarkerSheetPresented {
+                    EditMarkerView(
+                        markerItem: marker,
+                        isPresented: $isEditMarkerSheetPresented,
+                        isMapVisible: false
+                    )
+                    .padding()
+                    .presentationDetents([.fraction(0.5)])
+                } else {
+                    MarkerSelectedView(
+                        marker: marker,
+                        selection: $selection,
+                        editMarker: $editMarker,
+                        isEditMarkerSheetPresented: $isEditMarkerSheetPresented
+                    )
+                    .padding()
+                    .presentationDetents([.fraction(0.30)])
+                    .onAppear {
+                        cameraPosition = .item(marker.getAsMKMapItem())
+                    }
+                }
             }
-            .padding(12)
-            .tint(isEnabled ? .white : .blue)
-            .background(isEnabled ? .blue : .clear)
-            .background(.thinMaterial)
-            .cornerRadius(15)
+            .onChange(of: isEditMarkerSheetPresented) {
+                if !isEditMarkerSheetPresented {
+                    selection = nil
+                    editMarker = nil
+                }
+            }
         }
     }
 
@@ -160,6 +170,73 @@ struct MapView: View {
         let search = MKLocalSearch(request: request)
         let response = try? await search.start()
         return response?.mapItems.first
+    }
+
+    private struct CustomMapButton: View {
+        @Binding var isEnabled: Bool
+        var systemImageName: String
+
+        var body: some View {
+            Button {
+                isEnabled.toggle()
+            } label: {
+                Image(systemName: systemImageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 24)
+            }
+            .padding(12)
+            .tint(isEnabled ? .white : .blue)
+            .background(isEnabled ? .blue : .clear)
+            .background(.thinMaterial)
+            .cornerRadius(15)
+        }
+    }
+
+    private struct MarkerSelectedView: View {
+        @Environment(\.modelContext) private var context
+
+        @State var marker: MarkerItem
+        @Binding var selection: MarkerItem?
+        @Binding var editMarker: MarkerItem?
+        @Binding var isEditMarkerSheetPresented: Bool
+
+        var body: some View {
+            VStack {
+                HStack {
+                    Text(marker.placeName)
+                        .font(.title)
+                        .padding(.top)
+
+                    Spacer()
+                }
+
+                Divider()
+                    .background(Color("ForegroundColor"))
+
+                MarkerViewButtons(
+                    isPresented: .constant(true),
+                    acceptButtonName: "edit",
+                    acceptButtonColor: .blue,
+                    declineButtonName: "delete",
+                    declineButtonColor: .red,
+                    mapItem: marker.getAsMKMapItem(),
+                    isAcceptButtonAvailable: { true },
+                    onAccept: {
+                        editMarker = marker
+                        isEditMarkerSheetPresented = true
+                    },
+                    onDecline: {
+                        deleteMarker(marker)
+                        selection = nil
+                    }
+                )
+            }
+        }
+
+        private func deleteMarker(_ markerItem: MarkerItem) {
+            context.delete(markerItem)
+        }
     }
 }
 

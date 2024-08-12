@@ -11,34 +11,29 @@ import SwiftUI
 struct MarkerViewButtons: View {
     @Binding var isPresented: Bool
     let acceptButtonName: String
+    var acceptButtonColor: Color = .blue
+    var declineButtonName: String = "cancel"
+    var declineButtonColor: Color = .gray
     let mapItem: MKMapItem
     
     let isAcceptButtonAvailable: () -> Bool
     let onAccept: () -> Void
+    var onDecline: () -> Void
 
     var body: some View {
-        Button {
-            mapItem.openInMaps(launchOptions: nil)
-        } label: {
-            HStack {
-                Image(systemName: "apple.logo")
-
-                Text("open_maps")
-            }.font(.headline)
-                .padding()
-                .cornerRadius(10)
-        }
+        AppleMapsButton(item: mapItem)
 
         HStack {
             Button {
+                onDecline()
                 isPresented = false
             } label: {
-                Text("cancel")
+                Text(NSLocalizedString(declineButtonName, comment: ""))
                     .font(.headline)
                     .tint(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(.gray)
+                    .background(declineButtonColor)
                     .cornerRadius(15)
             }
             .layoutPriority(1)
@@ -54,7 +49,7 @@ struct MarkerViewButtons: View {
                     .tint(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(.blue)
+                    .background(acceptButtonColor)
                     .cornerRadius(15)
             }
             .layoutPriority(1)

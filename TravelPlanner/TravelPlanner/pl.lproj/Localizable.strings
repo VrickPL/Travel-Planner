@@ -19,6 +19,8 @@
 "open_maps" = "Otwórz mapy";
 "cancel" = "Anuluj";
 "add_marker" = "Dodaj znacznik";
+"edit" = "Edytuj";
+"delete" = "Usuń";
 "save_changes" = "Zapisz zmiany";
 "name_is_empty" = "Nazwa nie może być pusta.";
 "done" = "Gotowe";

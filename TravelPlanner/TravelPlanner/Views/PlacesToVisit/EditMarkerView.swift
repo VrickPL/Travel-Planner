@@ -17,12 +17,13 @@ struct EditMarkerView: View {
     @State private var name = ""
     @State private var description = ""
 
+    var isMapVisible = true
     @State private var cameraPosition: MapCameraPosition = .automatic
     @FocusState private var isInputActive: Bool
 
     var body: some View {
         VStack {
-            if !isInputActive {
+            if isMapVisible && !isInputActive {
                 Map(position: $cameraPosition) {
                     Marker(item: markerItem.getAsMKMapItem())
                         .annotationTitles(.hidden)
@@ -40,6 +41,10 @@ struct EditMarkerView: View {
                 description: $description,
                 isInputActive: $isInputActive
             )
+            .onAppear {
+                name = markerItem.placeName
+                description = markerItem.placeDescription
+            }
 
             Spacer()
 
@@ -48,16 +53,14 @@ struct EditMarkerView: View {
                 acceptButtonName: "save_changes",
                 mapItem: markerItem.getAsMKMapItem(),
                 isAcceptButtonAvailable: isNameNotEmpty,
-                onAccept: updateMarker
+                onAccept: updateMarker,
+                onDecline: {}
             )
         }
         .animation(.bouncy, value: isInputActive)
     }
-    
-    private func setCameraToMarker() {
-        name = markerItem.placeName
-        description = markerItem.placeDescription
 
+    private func setCameraToMarker() {
         let coordinates = CLLocationCoordinate2D(
             latitude: markerItem.latitude,
             longitude: markerItem.longitude

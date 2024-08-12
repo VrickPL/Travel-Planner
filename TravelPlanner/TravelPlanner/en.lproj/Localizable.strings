@@ -1,11 +1,10 @@
-/* 
+/*
   Localizable.strings
   TravelPlanner
 
   Created by Jan Kazubski on 07/08/2024.
   
 */
-
 
 //General
 "show_location_explanation" = "We need your location to show your current position.";
@@ -20,6 +19,8 @@
 "open_maps" = "Open maps";
 "cancel" = "Cancel";
 "add_marker" = "Add marker";
+"edit" = "Edit";
+"delete" = "Delete";
 "save_changes" = "Save changes";
 "name_is_empty" = "Name cannot be empty.";
 "done" = "Done";
