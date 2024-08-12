@@ -10,6 +10,7 @@ import SwiftUI
 struct FilteredListOfPlacesView: View {
     @Binding var names: [String]
     @Binding var markersByName: [String: [MarkerItem]]
+    @Binding var shouldBeRefreshed: Bool
 
     @State private var isListExpanded = false
     @State private var nameOfExpandedList: String?
@@ -70,6 +71,12 @@ struct FilteredListOfPlacesView: View {
         }
         .onChange(of: names) {
             clearExpandedList()
+        }
+        .onChange(of: shouldBeRefreshed) {
+            if shouldBeRefreshed {
+                clearExpandedList()
+                shouldBeRefreshed = false
+            }
         }
     }
 

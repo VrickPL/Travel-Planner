@@ -17,6 +17,8 @@ struct PlacesToVisitView: View {
     @State private var selectedPlace: MarkerItem?
 
     @State private var selectedFilter: FilterOption = .all
+    
+    @State private var shouldListBeRefreshed = false
 
     var body: some View {
         NavigationView {
@@ -27,7 +29,7 @@ struct PlacesToVisitView: View {
                 } else {
                     Picker("Filter", selection: $selectedFilter) {
                         ForEach(FilterOption.allCases, id: \.self) { option in
-                            Text(option.rawValue).tag(option)
+                            Text(NSLocalizedString(option.rawValue, comment: "")).tag(option)
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
@@ -51,10 +53,12 @@ struct PlacesToVisitView: View {
                         ScrollView {
                             FilteredListOfPlacesView(
                                 names: $viewModel.names,
-                                markersByName: $viewModel.markersByName
+                                markersByName: $viewModel.markersByName,
+                                shouldBeRefreshed: $shouldListBeRefreshed
                             )
                         }
                         .refreshable {
+                            shouldListBeRefreshed = true
                             viewModel.updateMarkersByName(
                                 placesToVisit: placesToVisit,
                                 selectedFilter: selectedFilter
