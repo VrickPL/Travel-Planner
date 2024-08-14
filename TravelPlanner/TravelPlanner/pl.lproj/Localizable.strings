@@ -42,3 +42,9 @@
 "polish" = "Polski";
 "light" = "Jasny";
 "dark" = "Ciemny";
+
+//Tips
+"tip_add_marker_title" = "Kliknij plus!";
+"tip_add_marker_message" = "Kliknij plus, aby dodać nowy znacznik na mapie.";
+"tip_edit_marker_title" = "Edytuj miejsce";
+"tip_edit_marker_message" = "Wybierz jedno z widocznych miejsc, aby je edytować.";

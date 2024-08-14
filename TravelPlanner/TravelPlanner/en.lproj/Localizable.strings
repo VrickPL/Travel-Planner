@@ -42,3 +42,9 @@
 "polish" = "Polski";
 "light" = "Light";
 "dark" = "Dark";
+
+//Tips
+"tip_add_marker_title" = "Tap plus icon!";
+"tip_add_marker_message" = "Tap plus icon to add new marker to the map.";
+"tip_edit_marker_title" = "Edit place";
+"tip_edit_marker_message" = "Choose one from the visible places to edit it.";

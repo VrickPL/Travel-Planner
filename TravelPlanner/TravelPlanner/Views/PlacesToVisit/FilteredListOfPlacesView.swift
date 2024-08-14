@@ -76,7 +76,7 @@ struct FilteredListOfPlacesView: View {
             if shouldBeRefreshed {
                 clearExpandedList()
                 shouldBeRefreshed = false
-            }
+            } 
         }
     }
 

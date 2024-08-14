@@ -8,6 +8,7 @@
 import MapKit
 import SwiftData
 import SwiftUI
+import TipKit
 
 struct MapView: View {
     @Query private var placesToVisit: [MarkerItem]
@@ -69,6 +70,7 @@ struct MapView: View {
                             isEnabled: $isAddMarkerEnabled,
                             systemImageName: "plus"
                         )
+                        .popoverTip(AddMarkerTip(), arrowEdge: .bottom)
 
                         CustomMapButton(
                             isEnabled: $isSearchEnabled,

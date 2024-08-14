@@ -8,16 +8,18 @@
 import MapKit
 import SwiftData
 import SwiftUI
+import TipKit
 
 struct PlacesToVisitView: View {
     @State private var viewModel = PlacesToVisitViewModel()
 
     @Query private var placesToVisit: [MarkerItem]
-    //    @State var placesToVisit: [MarkerItem] = []
     @State private var selectedPlace: MarkerItem?
+    // uncomment to see preview
+    //    @State var placesToVisit: [MarkerItem] = []
 
     @State private var selectedFilter: FilterOption = .all
-    
+
     @State private var shouldListBeRefreshed = false
 
     var body: some View {
@@ -29,7 +31,9 @@ struct PlacesToVisitView: View {
                 } else {
                     Picker("Filter", selection: $selectedFilter) {
                         ForEach(FilterOption.allCases, id: \.self) { option in
-                            Text(NSLocalizedString(option.rawValue, comment: "")).tag(option)
+                            Text(
+                                NSLocalizedString(option.rawValue, comment: "")
+                            ).tag(option)
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
@@ -65,6 +69,10 @@ struct PlacesToVisitView: View {
                             )
                         }
                     }
+                    
+                    TipView(EditMarkerTip())
+                        .tipBackground(.gray)
+                        .padding()
                 }
             }
             .navigationBarItems(
