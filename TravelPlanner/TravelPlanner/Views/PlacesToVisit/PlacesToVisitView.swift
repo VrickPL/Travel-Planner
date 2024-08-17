@@ -18,7 +18,7 @@ struct PlacesToVisitView: View {
     // uncomment to see preview
     //    @State var placesToVisit: [MarkerItem] = []
 
-    @State private var selectedFilter: FilterOption = .all
+    @State private var selectedFilter: FilterOption = .country
 
     @State private var shouldListBeRefreshed = false
 

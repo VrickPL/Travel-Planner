@@ -13,31 +13,19 @@ struct SinglePlaceView: View {
     @State var place: MarkerItem
 
     var body: some View {
-        HStack {
-            Button {
-                //TODO: fix clicking on button and load photo from gallery
-            } label: {
-                ZStack {
-                    Circle()
-                        .stroke(lineWidth: 2)
-                        .frame(width: 40, height: 40)
+        Button {
+            selectedPlace = place
+            isNewMarkerSheetEnabled = true
+        } label: {
+            HStack {
+                PlaceImageView(imageData: $place.imageData)
+                    .padding(.trailing, 8)
+                    .scaleEffect(1.2)
 
-                    Image(systemName: "plus")
-                        .resizable()
-                        .frame(width: 15, height: 15)
-                }
-            }
-            .foregroundStyle(.blue)
-            .padding(.trailing, 8)
-
-            Button {
-                selectedPlace = place
-                isNewMarkerSheetEnabled = true
-            } label: {
                 SinglePlaceViewWithoutImage(place: place)
             }
-            .padding(.vertical, 4)
         }
+        .padding(.vertical, 4)
     }
 
     private struct SinglePlaceViewWithoutImage: View {
@@ -85,7 +73,8 @@ struct SinglePlaceView: View {
             longitude: -122.0090,
             latitude: 37.3349,
             country: "US",
-            city: "Cupertino"
+            city: "Cupertino",
+            imageData: nil
         )
     )
 }

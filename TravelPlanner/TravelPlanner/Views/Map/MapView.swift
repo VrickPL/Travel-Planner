@@ -116,6 +116,7 @@ struct MapView: View {
                     )
                     .presentationDetents([.fraction(0.5)])
                     .padding()
+                    .padding(.top)
                 }
             }
             .sheet(item: $selection) { marker in
@@ -126,6 +127,7 @@ struct MapView: View {
                         isMapVisible: false
                     )
                     .padding()
+                    .padding(.top)
                     .presentationDetents([.fraction(0.5)])
                 } else {
                     MarkerSelectedView(
@@ -135,7 +137,7 @@ struct MapView: View {
                         isEditMarkerSheetPresented: $isEditMarkerSheetPresented
                     )
                     .padding()
-                    .presentationDetents([.fraction(0.30)])
+                    .presentationDetents([.fraction(0.5)])
                     .onAppear {
                         cameraPosition = .item(marker.getAsMKMapItem())
                     }
@@ -205,6 +207,18 @@ struct MapView: View {
 
         var body: some View {
             VStack {
+                Button {
+                    editMarker = marker
+                    isEditMarkerSheetPresented = true
+                } label: {
+                    PlaceImageView(imageData: $marker.imageData)
+                        .frame(width: 250)
+                        .scaleEffect(3)
+                }
+                .padding()
+                .padding()
+                .padding(.top)
+
                 HStack {
                     Text(marker.placeName)
                         .font(.title)
@@ -215,6 +229,8 @@ struct MapView: View {
 
                 Divider()
                     .background(Color("ForegroundColor"))
+                
+                Spacer()
 
                 MarkerViewButtons(
                     isPresented: .constant(true),

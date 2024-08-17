@@ -16,6 +16,7 @@ struct EditMarkerView: View {
 
     @State private var name = ""
     @State private var description = ""
+    @State private var imageData: Data?
 
     var isMapVisible = true
     @State private var cameraPosition: MapCameraPosition = .automatic
@@ -23,7 +24,20 @@ struct EditMarkerView: View {
 
     var body: some View {
         VStack {
+            PlaceDescriptionView(
+                name: $name,
+                description: $description,
+                imageData: $imageData,
+                isInputActive: $isInputActive
+            )
+            .onAppear {
+                name = markerItem.placeName
+                description = markerItem.placeDescription
+            }
+
             if isMapVisible && !isInputActive {
+                Spacer()
+
                 Map(position: $cameraPosition) {
                     Marker(item: markerItem.getAsMKMapItem())
                         .annotationTitles(.hidden)
@@ -32,18 +46,6 @@ struct EditMarkerView: View {
                 .onAppear {
                     setCameraToMarker()
                 }
-
-                Spacer()
-            }
-
-            PlaceDescriptionView(
-                name: $name,
-                description: $description,
-                isInputActive: $isInputActive
-            )
-            .onAppear {
-                name = markerItem.placeName
-                description = markerItem.placeDescription
             }
 
             Spacer()
@@ -58,6 +60,9 @@ struct EditMarkerView: View {
             )
         }
         .animation(.bouncy, value: isInputActive)
+        .onAppear {
+            imageData = markerItem.imageData
+        }
     }
 
     private func setCameraToMarker() {
@@ -88,6 +93,7 @@ struct EditMarkerView: View {
         return {
             markerItem.placeName = name
             markerItem.placeDescription = description
+            markerItem.imageData = imageData
 
             try? context.save()
         }
@@ -103,7 +109,8 @@ struct EditMarkerView: View {
             longitude: -122.0090,
             latitude: 37.3349,
             country: "US",
-            city: "Cupertino"
+            city: "Cupertino",
+            imageData: nil
         ),
         isPresented: .constant(true)
     )

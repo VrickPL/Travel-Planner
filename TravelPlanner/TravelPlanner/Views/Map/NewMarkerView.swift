@@ -16,6 +16,7 @@ struct NewMarkerView: View {
 
     @State private var name = ""
     @State private var description = ""
+    @State private var imageData: Data? = nil
 
     @State private var city: String?
     @State private var country: String?
@@ -27,6 +28,7 @@ struct NewMarkerView: View {
             PlaceDescriptionView(
                 name: $name,
                 description: $description,
+                imageData: $imageData,
                 isInputActive: $isInputActive
             )
 
@@ -40,7 +42,8 @@ struct NewMarkerView: View {
                 onAccept: addMarker,
                 onDecline: {}
             )
-        }.onAppear {
+        }
+        .onAppear {
             if name.isEmpty {
                 setDefaultLocationInfo()
             }
@@ -82,7 +85,8 @@ struct NewMarkerView: View {
                 longitude: coordinates.longitude,
                 latitude: coordinates.latitude,
                 country: country,
-                city: city
+                city: city,
+                imageData: imageData
             )
 
             context.insert(markerItem)

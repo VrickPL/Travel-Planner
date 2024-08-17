@@ -18,6 +18,7 @@ class MarkerItem: Identifiable {
     var latitude: Double
     var country: String?
     var city: String?
+    var imageData: Data?
 
     init(
         placeName: String,
@@ -25,7 +26,8 @@ class MarkerItem: Identifiable {
         longitude: Double,
         latitude: Double,
         country: String?,
-        city: String?
+        city: String?,
+        imageData: Data?
     ) {
         self.id = UUID().uuidString
         self.placeName = placeName
@@ -34,6 +36,7 @@ class MarkerItem: Identifiable {
         self.latitude = latitude
         self.country = country
         self.city = city
+        self.imageData = imageData
     }
 
     func getAsMKMapItem() -> MKMapItem {

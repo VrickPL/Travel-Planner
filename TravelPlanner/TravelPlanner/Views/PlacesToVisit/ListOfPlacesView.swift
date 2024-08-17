@@ -63,6 +63,7 @@ struct ListOfPlacesView: View {
                     isPresented: $isNewMarkerSheetEnabled
                 )
                 .padding()
+                .padding(.top)
             }
         }
     }
@@ -82,7 +83,8 @@ struct ListOfPlacesView: View {
                 longitude: -122.0090,
                 latitude: 37.3349,
                 country: "US",
-                city: "Cupertino"
+                city: "Cupertino",
+                imageData: nil
             ),
             MarkerItem(
                 placeName: "Facebook",
@@ -91,7 +93,8 @@ struct ListOfPlacesView: View {
                 longitude: -122.0090,
                 latitude: 37.3349,
                 country: "US",
-                city: "Cupertino"
+                city: "Cupertino",
+                imageData: nil
             ),
             MarkerItem(
                 placeName: "Twitter",
@@ -100,7 +103,8 @@ struct ListOfPlacesView: View {
                 longitude: -122.0090,
                 latitude: 37.3349,
                 country: "US",
-                city: "New York"
+                city: "New York",
+                imageData: nil
             ),
             MarkerItem(
                 placeName: "Pudliszki",
@@ -109,7 +113,8 @@ struct ListOfPlacesView: View {
                 longitude: -122.0090,
                 latitude: 37.3349,
                 country: "Polska",
-                city: "Pudliszki"
+                city: "Pudliszki",
+                imageData: nil
             ),
             MarkerItem(
                 placeName: "PGE Narodowy",
@@ -118,7 +123,8 @@ struct ListOfPlacesView: View {
                 longitude: -122.0090,
                 latitude: 37.3349,
                 country: "Polska",
-                city: "Warszawa"
+                city: "Warszawa",
+                imageData: nil
             ),
             MarkerItem(
                 placeName: "Dworzec Główny",
@@ -127,7 +133,8 @@ struct ListOfPlacesView: View {
                 longitude: -122.0090,
                 latitude: 37.3349,
                 country: "Polska",
-                city: "Warszawa"
+                city: "Warszawa",
+                imageData: nil
             ),
             MarkerItem(
                 placeName: "Kebab",
@@ -136,9 +143,10 @@ struct ListOfPlacesView: View {
                 longitude: -122.0090,
                 latitude: 37.3349,
                 country: "Germany",
-                city: "Berlin"
+                city: "Berlin",
+                imageData: nil
             ),
         ],
-        shouldBeCustom: true
+        shouldBeCustom: false
     )
 }
