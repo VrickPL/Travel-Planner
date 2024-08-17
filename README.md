@@ -7,15 +7,12 @@ Mobile App for iOS to plan your future trips.
 <br>
 With this app, you can create markers and enter their name, description, and upload your own images. You can search for places or cities by name, or explore them on your own using the map. At any time, you can edit or delete your markers by tapping on them, either on the map or in the 'Places to Visit' section.
 
-<br>
-<br>
-
 
 ## Table of contents 
-- [Used technologies and libraries]()
-- [Map]()
-- [Places to visit]()
-- [Settings]()
+- [Used technologies and libraries](https://github.com/VrickPL/Travel-Planner/tree/feature/readme?tab=readme-ov-file#used-technologies-and-libraries)
+- [Map](https://github.com/VrickPL/Travel-Planner/tree/feature/readme?tab=readme-ov-file#map)
+- [Places to visit](https://github.com/VrickPL/Travel-Planner/tree/feature/readme?tab=readme-ov-file#places-to-visit)
+- [Settings](https://github.com/VrickPL/Travel-Planner/tree/feature/readme?tab=readme-ov-file#settings)
 
 ## Used technologies and libraries
 - **[Swift](https://www.swift.org/documentation/)**,  
@@ -23,7 +20,7 @@ With this app, you can create markers and enter their name, description, and upl
 - **[SwiftData](https://developer.apple.com/documentation/swiftdata)**, 
 - **[MapKit](https://developer.apple.com/documentation/mapkit/)**,
 - **[TipKit](https://developer.apple.com/documentation/tipkit/)**,
-- **[PhotosPicker](https://developer.apple.com/documentation/photokit/photopicker/)**
+- **[PhotosPicker](https://developer.apple.com/documentation/photokit/photospicker/)**
 
 Project has been written in **MVVM** pattern.
 
@@ -45,4 +42,4 @@ In Settings you can change:
   
 Your choices will be saved in **AppStorage**.
 
-In this section, you can also find my **Github** and **LinkedIn** profiles. 
+In this section, you can also find my **GitHub** and **LinkedIn** profiles. 
