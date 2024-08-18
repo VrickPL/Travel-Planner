@@ -10,10 +10,10 @@ With this app, you can create markers and enter their name, description, and upl
 
 
 ## Table of contents 
-- [Used technologies and libraries](https://github.com/VrickPL/Travel-Planner/tree/feature/readme?tab=readme-ov-file#used-technologies-and-libraries)
-- [Map](https://github.com/VrickPL/Travel-Planner/tree/feature/readme?tab=readme-ov-file#map)
-- [Places to visit](https://github.com/VrickPL/Travel-Planner/tree/feature/readme?tab=readme-ov-file#places-to-visit)
-- [Settings](https://github.com/VrickPL/Travel-Planner/tree/feature/readme?tab=readme-ov-file#settings)
+- [Used technologies and libraries](https://github.com/VrickPL/Travel-Planner/tree/main?tab=readme-ov-file#used-technologies-and-libraries)
+- [Map](https://github.com/VrickPL/Travel-Planner/tree/main?tab=readme-ov-file#map)
+- [Places to visit](https://github.com/VrickPL/Travel-Planner/tree/main?tab=readme-ov-file#places-to-visit)
+- [Settings](https://github.com/VrickPL/Travel-Planner/tree/main?tab=readme-ov-file#settings)
 
 ## Used technologies and libraries
 - **[Swift](https://www.swift.org/documentation/)**,  
