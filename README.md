@@ -5,7 +5,8 @@ Travel Planner
 Mobile App for iOS to plan your future trips.
 </h3>
 <br>
-With this app, you can create markers and enter their name, description, and upload your own images. You can search for places or cities by name, or explore them on your own using the map. At any time, you can edit or delete your markers by tapping on them, either on the map or in the 'Places to Visit' section.
+
+With this app, you can create markers and enter their name, description, and upload your own images. You can search for places or cities by name, or explore them on your own using the map. At any time, you can edit or delete your markers by tapping on them, whether in the **Map** or **Places to Visit** sections.
 
 
 ## Table of contents 
@@ -39,7 +40,16 @@ If you lose orientation and are unsure where you are, don't worry! In the top ri
 
 
 ## Places to visit
-  
+Here, you will see the markers that you have added in the **Map** section. You can filter them by country, city, or leave the filters off if you'd prefer.
+<br>
+<br>
+If you display them with a filter, you'll notice some animations when opening the list. Choose a place and click on it! You will be taken to a screen where you can edit the name, description, and change the photo. You will also see a map with the place you are currently viewing.
+<br>
+<br>
+At the top of the screen, there is a gear-shaped icon. Clicking on it will open the **Settings** screen.
+<br>
+<br>
+Everything is saved using **SwiftData**, so it's unlikely that you'll encounter any bugs. However, if something hasn't updated correctly, you can drag the screen down to refresh it!
 
 
 
