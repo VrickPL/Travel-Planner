@@ -25,7 +25,16 @@ With this app, you can create markers and enter their name, description, and upl
 Project has been written in **MVVM** pattern.
 
 ## Map
-
+In the **Map** section, you can explore the entire Earth! It is based on **Apple Maps**. You can search for places or cities by name, or explore them on your own. When you find something interesting, click on the **plus** icon and tap on the map to add a marker. You can then enter the name, description, and choose a photo of the place from your photo library. The name of the place will be entered automatically, but you can change it if you'd like.
+<br>
+<br>
+If you tap on an existing marker, you can either delete it or edit it (by tapping on the image, you'll also go to the edit screen). You can also go to the **Apple Maps** app by clicking a button.
+<br>
+<br>
+When you enter the app for the first time, you will be asked to **share your location** to display your current position on the map. Next, you will see a **tip** that explains how to add a new marker.
+<br>
+<br>
+If you lose orientation and are unsure where you are, don't worry! In the top right corner, you'll find a button to return to your current position.
 
 
 
