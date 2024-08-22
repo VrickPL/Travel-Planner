@@ -8,13 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @AppStorage(Keys.SELECTED_LANGUAGE) private var selectedLanguage:
-        Language = Language.systemDefault
-    @AppStorage(Keys.SELECTED_THEME) private var selectedTheme:
-        Theme = Theme.systemDefault
-    
-    @Environment(\.colorScheme) var systemColorScheme
-    
     var body: some View {
         TabView {
             MapView()
@@ -29,12 +22,6 @@ struct ContentView: View {
                     Text("places_to_visit")
                 }
         }
-        .environment(\.locale, selectedLanguage.locale)
-        .environment(\.colorScheme, selectedColorScheme)
-    }
-    
-    private var selectedColorScheme: ColorScheme {
-        return selectedTheme.colorScheme ?? systemColorScheme
     }
 }
 
